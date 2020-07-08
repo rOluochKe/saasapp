@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Saasapp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,700,800" rel="stylesheet">
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="container">
+      <%= yield %>
+    </div>
+  </body>
+</html>
