@@ -17,4 +17,4 @@ require("channels")
 // const imagePath = (name) => images(name, true)
 
 require("bootstrap")
-require("@fortawesome/fontawesome-free");
+require("../../assets/stylesheets/application.scss")
