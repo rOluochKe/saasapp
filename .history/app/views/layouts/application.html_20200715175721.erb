@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SaaS Application</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">  
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,700,800" rel="stylesheet">
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag "https://js.stripe.com/v2/", type: 'text/javascript' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class='container'>
+        <%= link_to root_path, class: "navbar-brand" do %>
+          <i class="fa fa-group"></i>
+          SaaS
+        <% end %>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto mr-3">
+            <li class="nav-item"><%= link_to "About", about_path, class: "nav-link"  %></li>
+            <li class="nav-item"><%= link_to "Contact Us", new_contact_path, class: "nav-link"  %></li>
+          </ul>
+          <div class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+              <li class="nav-item"><%= link_to "Create your profile!", new_user_profile_path(user_id: current_user.id) if user_signed_in?, :class = 'btn btn-inverse' %></li>
+              <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "btn btn-light navbar-btn" %>
+            <% else %>
+              <%= link_to "Log In", new_user_session_path, class: "btn btn-light navbar-btn" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container flash-container mt-3">
+      <% flash.each do |type, msg| %>
+        <%= content_tag :div, msg, class: "alert alert-#{type}" %>
+      <% end %>
+    </div>
+    <%= yield %>
+  </body>
+</html>
